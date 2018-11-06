@@ -48,13 +48,10 @@ const checkOrientation = async imagePath => {
   }
   if (dimensions.width >= dimensions.height && ~imagePath.indexOf("Postcard")) {
     console.log("rotate");
-    await jimp.read(imagePath, (err, img) => {
-      if (err) throw err;
-      console.log("Start Rotate");
-      img.rotate(90).write(imagePath);
-      console.log("Rotated");
-      return;
-    });
+    const image = await jimp.read(imagePath);
+    console.log("Start Rotate");
+    image.rotate(90).write(imagePath);
+    console.log("Rotated");
     console.log("Finish rotate");
   }
 };
